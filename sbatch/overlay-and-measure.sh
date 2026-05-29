@@ -19,4 +19,6 @@ echo "Processing string: $CURRENT_STRING"
 
 cd /oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline
 source .venv/bin/activate
-python3 /oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/sbatch/overlay-and-measure.py "$CURRENT_STRING"
+python3 /oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/sbatch/overlay-and-measure.py \
+    "/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline" \
+    "$CURRENT_STRING"

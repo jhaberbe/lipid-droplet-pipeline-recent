@@ -19,4 +19,6 @@ echo "Processing string: $CURRENT_STRING"
 
 source .venv/bin/activate
 cd /oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline
-python3 /oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/sbatch/random-forest-image-classifier.py "$CURRENT_STRING"
+python3 /oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/sbatch/random-forest-image-classifier.py \
+    "/oak/stanford/projects/kibr/reorganizing/projects/james/lipid-droplet-pipeline" \
+    "$current_string"

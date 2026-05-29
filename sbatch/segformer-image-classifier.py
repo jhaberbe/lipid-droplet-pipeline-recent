@@ -35,10 +35,12 @@ def read_data_chunk(i: int, j: int):
     result_img_array[i*800:(i+1)*800, j*800:(j+1)*800] = pred_seg.detach().numpy()
 
 
-slide_number = sys.argv[1]
+directory = sys.argv[1]
+slide_number = sys.argv[2]
+
 if __name__ == "__main__":
     # IHC Slides 
-    ihc_slide_paths = list(pathlib.Path("/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet/data/raw/ihc-oil-red-o/").glob("*.ome.tif"))
+    ihc_slide_paths = list(pathlib.Path(f"{directory}/data/raw/ihc-oil-red-o/").glob("*.ome.tif"))
     slide = ihc_slide_paths[slide_number]
 
     # Pipeline setup for segformer
@@ -60,4 +62,4 @@ if __name__ == "__main__":
     for i, j in tqdm(list(itertools.product(range(num_chunks_x), range(num_chunks_y)))):
         read_data_chunk(i, j)
 
-    tifffile.imwrite(f'/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/data/processed/segmentation/oil-red-o/{slide.name.split(".")[0]}.tif', result_img_array)
+    tifffile.imwrite(f'{directory}/data/processed/segmentation/oil-red-o/{slide.name.split(".")[0]}.tif', result_img_array)

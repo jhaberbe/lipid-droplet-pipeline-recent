@@ -5,13 +5,14 @@ import itertools
 from tqdm import tqdm 
 from src.weka import *
 
-folder = sys.argv[1] 
+directory = sys.argv[1] 
+folder = sys.argv[2] 
 
 # Load Classifier from weka-type-segmentation
-model = pickle.load(open("/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/models/classifier.pickle", "rb"))
+model = pickle.load(open(f"{directory}/models/classifier.pickle", "rb"))
 
 # Load Image
-img = tifffile.imread(f"/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/data/raw/slides/plin2/{folder}.tif")
+img = tifffile.imread(f"{directory}/data/raw/slides/plin2/{folder}.tif")
 
 # Normalize
 img = normalize_image(img)
@@ -29,5 +30,5 @@ for i, j in tqdm(list(itertools.product(range((img.shape[0] // 800)), range((img
         Warning(f"failed patch at x: {i*800}, y: {j * 800}")
 
 # Saving twice.
-pickle.dump(new_img, open(f"/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/data/processed/segmentation/plin2/{folder}.pickle", "wb"))
-tifffile.imwrite(f"/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/data/processed/segmentation/plin2/{folder}.tif", new_img)
+pickle.dump(new_img, open(f"{directory}/data/processed/segmentation/plin2/{folder}.pickle", "wb"))
+tifffile.imwrite(f"{directory}/data/processed/segmentation/plin2/{folder}.tif", new_img)

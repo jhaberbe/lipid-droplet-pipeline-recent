@@ -7,15 +7,6 @@ import scipy.spatial
 from tqdm import tqdm
 from matplotlib.path import Path
 
-folder_key = sys.argv[1]
-
-example = list(pathlib.Path("/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/data/raw/xenium/").glob(f"*{folder_key}*"))[0]
-
-lipid_droplets = pd.read_csv(f"/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/data/processed/locations/lipid-droplet/{folder_key}.csv").drop("Unnamed: 0", axis=1).mul(0.2125)
-plin2 = pd.read_csv(f"/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/data/processed/locations/plin2/{folder_key}.csv").drop("Unnamed: 0", axis=1).mul(0.2125)
-oil_red_o = pd.read_csv(f"/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/data/processed/locations/oil-red-o/{folder_key}.csv").drop("Unnamed: 0", axis=1).mul(0.2125)
-amyloid = pd.read_csv(f"/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/data/processed/locations/amyloid/{folder_key}.csv").drop("Unnamed: 0", axis=1)
-
 def read_xenium_data(xenium_path: pathlib.Path):
     adata = sc.read_10x_h5(xenium_path / "cell_feature_matrix.h5")
     adata.obs = pd.read_csv(xenium_path / "cells.csv.gz").set_index("cell_id")
@@ -61,11 +52,36 @@ def assign_stain_measurement(adata: ad.AnnData, measurement: pd.DataFrame, measu
     
     return adata
 
-adata = read_xenium_data(example)
 
-adata = assign_stain_measurement(adata, lipid_droplets, "lipid_droplet_area")
-adata = assign_stain_measurement(adata, plin2, "plin2_area")
-adata = assign_stain_measurement(adata, oil_red_o, "oil_red_o_area")
-adata = assign_distance_measurement(adata, amyloid, "distance_to_nearest_amyloid")
+if __name__ == "__main__":
+    directory = sys.argv[1]
+    folder_key = sys.argv[2]
 
-adata.write_h5ad(f"/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/data/processed/adata/mapped_pathology_data/{folder_key}.h5ad")
+    example = list(pathlib.Path(f"{directory}/data/raw/xenium/").glob(f"*{folder_key}*"))[0]
+
+    lipid_droplets = pd.read_csv(
+        f"{directory}/data/processed/locations/lipid-droplet/{folder_key}.csv"
+    ).drop("Unnamed: 0", axis=1).mul(0.2125)
+
+    plin2 = pd.read_csv(
+        f"{directory}/data/processed/locations/plin2/{folder_key}.csv"
+    ).drop("Unnamed: 0", axis=1).mul(0.2125)
+
+    oil_red_o = pd.read_csv(
+        f"{directory}/data/processed/locations/oil-red-o/{folder_key}.csv"
+    ).drop("Unnamed: 0", axis=1).mul(0.2125)
+
+    amyloid = pd.read_csv(
+        f"{directory}/data/processed/locations/amyloid/{folder_key}.csv"
+    ).drop("Unnamed: 0", axis=1)
+
+    adata = read_xenium_data(example)
+
+    adata = assign_stain_measurement(adata, lipid_droplets, "lipid_droplet_area")
+    adata = assign_stain_measurement(adata, plin2, "plin2_area")
+    adata = assign_stain_measurement(adata, oil_red_o, "oil_red_o_area")
+    adata = assign_distance_measurement(adata, amyloid, "distance_to_nearest_amyloid")
+
+    adata.write_h5ad(
+        f"{directory}/data/processed/adata/mapped_pathology_data/{folder_key}.h5ad"
+    )
