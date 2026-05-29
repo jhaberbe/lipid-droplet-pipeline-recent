@@ -1,3 +1,4 @@
+# %%
 import sys
 import pickle
 import pathlib
@@ -11,6 +12,7 @@ from tqdm import tqdm
 from PIL import Image, ImageDraw
 from shapely.geometry import Polygon
 
+# %%
 oil_red_o_image_mapping = {
     "13-69": "Slide_2_13-69_05-27.tif",
     "05-27": "Slide_2_13-69_05-27.tif",
@@ -26,6 +28,7 @@ oil_red_o_image_mapping = {
     "99-15": "0029282_AD_44_99-15_04-06.tif"
 }
 
+# %%
 def polygons_to_instance_mask(polygons, image_size):
     """
     Convert a list of polygons to an instance segmentation mask.
@@ -47,32 +50,36 @@ def polygons_to_instance_mask(polygons, image_size):
 
     return np.array(mask)
 
+# %%
+# Typically passed as arguments
+directory = sys.argv[1]
+folder_key = sys.argv[2]
+
 sys.path.append(directory)
 from src.image_alignment import *
 
+# %%
 if __name__ == "__main__":
-    directory = sys.argv[1]
-    folder_key = sys.argv[2]
 
+    # Some of the location information.
     raw_slide_location = pathlib.Path(f"{directory}/data/raw/slides/")
     segmentation_slide_location = pathlib.Path(f"{directory}/data/processed/segmentation")
     segmentation_alignments_location = pathlib.Path(f"{directory}/data/alignments")
 
-    boundaries = pd.read_csv(list(pathlib.Path(f"{directory}/data/raw/xenium_runs").glob(f"*{folder_key}*"))[0] / "cell_boundaries.csv.gz")
+    # Grab cell boundary folder
+    boundaries = pd.read_csv(list(pathlib.Path(f"{directory}/data/raw/xenium").glob(f"*{folder_key}*"))[0] / "cell_boundaries.csv.gz")
 
+    # Polygons
     polygons = [
         [(x, y) for x, y in zip(df["vertex_x"]/.2125, df["vertex_y"]/.2125)]
         for cell, df in boundaries.groupby("cell_id")
     ]
 
-    plin_path = raw_slide_location / "plin2" / f"{folder_key}.tif"
-    plin_image = (tifffile.imread(plin_path) >= threshold_by_folder[folder_key])
-
     oil_red_o_path = segmentation_slide_location / "oil-red-o" / oil_red_o_image_mapping[folder_key]
-    oil_red_o_image = tifffile.imread(oil_red_o_path) >= 0.5 
+    oil_red_o_image = tifffile.imread(oil_red_o_path) == 1 
 
     # Finds the size of the slide, and returns the minimal bounding box plus a large berth for safety.
-    cells = pd.read_csv(list(pathlib.Path(f"{directory}/data/raw/xenium_runs").glob(f"*{folder_key}*"))[0] / "cells.csv.gz")
+    cells = pd.read_csv(list(pathlib.Path(f"{directory}/data/raw/xenium").glob(f"*{folder_key}*"))[0] / "cells.csv.gz")
     x_max, y_max = cells[["x_centroid", "y_centroid"]].max().tolist()
     output_shape = (round(y_max / 0.2125), round(x_max / 0.2125))
 
@@ -89,3 +96,5 @@ if __name__ == "__main__":
     print(f"Measurement of {folder_key} Oil Red O")
     oil_red_o_measurements = generate_measurements(oil_red_o_image)
     oil_red_o_measurements.to_csv(f"/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/data/processed/locations/oil-red-o/{folder_key}.csv")
+
+

@@ -40,7 +40,7 @@ slide_number = sys.argv[2]
 
 if __name__ == "__main__":
     # IHC Slides 
-    ihc_slide_paths = list(pathlib.Path(f"{directory}/data/raw/ihc-oil-red-o/").glob("*.ome.tif"))
+    ihc_slide_paths = list(pathlib.Path(f"{directory}/data/raw/slides/oil-red-o/").glob("*.ome.tif"))
     slide = ihc_slide_paths[slide_number]
 
     # Pipeline setup for segformer
@@ -52,7 +52,7 @@ if __name__ == "__main__":
     reader = OMETIFFReader(fpath=slide)
     img_array, metadata, xml_metadata = reader.read()
 
-            # Initialize an empty array to store the results
+    # Initialize an empty array to store the results
     result_img_array = np.empty_like(img_array[:, :, 0])
 
     # TODO: parallelize this using multiprocessing or Dask
@@ -61,5 +61,6 @@ if __name__ == "__main__":
     num_chunks_y = img_array.shape[1] // 800
     for i, j in tqdm(list(itertools.product(range(num_chunks_x), range(num_chunks_y)))):
         read_data_chunk(i, j)
+        break
 
     tifffile.imwrite(f'{directory}/data/processed/segmentation/oil-red-o/{slide.name.split(".")[0]}.tif', result_img_array)

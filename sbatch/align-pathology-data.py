@@ -59,13 +59,13 @@ if __name__ == "__main__":
 
     example = list(pathlib.Path(f"{directory}/data/raw/xenium/").glob(f"*{folder_key}*"))[0]
 
-    lipid_droplets = pd.read_csv(
-        f"{directory}/data/processed/locations/lipid-droplet/{folder_key}.csv"
-    ).drop("Unnamed: 0", axis=1).mul(0.2125)
+    # lipid_droplets = pd.read_csv(
+    #     f"{directory}/data/processed/locations/lipid-droplet/{folder_key}.csv"
+    # ).drop("Unnamed: 0", axis=1).mul(0.2125)
 
-    plin2 = pd.read_csv(
-        f"{directory}/data/processed/locations/plin2/{folder_key}.csv"
-    ).drop("Unnamed: 0", axis=1).mul(0.2125)
+    # plin2 = pd.read_csv(
+    #     f"{directory}/data/processed/locations/plin2/{folder_key}.csv"
+    # ).drop("Unnamed: 0", axis=1).mul(0.2125)
 
     oil_red_o = pd.read_csv(
         f"{directory}/data/processed/locations/oil-red-o/{folder_key}.csv"
@@ -77,8 +77,8 @@ if __name__ == "__main__":
 
     adata = read_xenium_data(example)
 
-    adata = assign_stain_measurement(adata, lipid_droplets, "lipid_droplet_area")
-    adata = assign_stain_measurement(adata, plin2, "plin2_area")
+    # adata = assign_stain_measurement(adata, lipid_droplets, "lipid_droplet_area")
+    # adata = assign_stain_measurement(adata, plin2, "plin2_area")
     adata = assign_stain_measurement(adata, oil_red_o, "oil_red_o_area")
     adata = assign_distance_measurement(adata, amyloid, "distance_to_nearest_amyloid")
 

@@ -10,7 +10,7 @@
 #SBATCH -n 1
 #SBATCH -N 1
 
-ml python/3.12.1
+ml python/3.9.0
 
 STRINGS=("04-06" "04-44" "05-27" "10-46" "13-54" "13-69" "14-02" "14-20" "15-27" "18-20" "18-75" "99-15")
 CURRENT_STRING=${STRINGS[$SLURM_ARRAY_TASK_ID]}
@@ -20,5 +20,5 @@ echo "Processing string: $CURRENT_STRING"
 source .venv/bin/activate
 cd /oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline
 python3 /oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/sbatch/random-forest-image-classifier.py \
-    "/oak/stanford/projects/kibr/reorganizing/projects/james/lipid-droplet-pipeline" \
-    "$current_string"
+    "/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline" \
+    "$CURRENT_STRING"

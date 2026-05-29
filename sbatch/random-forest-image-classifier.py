@@ -3,6 +3,8 @@ import pickle
 import tifffile
 import itertools
 from tqdm import tqdm 
+
+sys.path.append("..")
 from src.weka import *
 
 directory = sys.argv[1] 
