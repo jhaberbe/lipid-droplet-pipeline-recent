@@ -1,0 +1,6 @@
+data/
+.venv/
+logs/
+archived/
+
+notebooks/*.h5ad

@@ -1,0 +1,71 @@
+{
+  "os": "Linux-3.10.0-1160.119.1.el7.tuxcare.els15.x86_64-x86_64-with-glibc2.17",
+  "python": "CPython 3.12.1",
+  "startedAt": "2025-04-16T17:18:56.619578Z",
+  "program": "/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/segmentation-using-cell-borders.ipynb",
+  "codePath": "segmentation-using-cell-borders.ipynb",
+  "git": {
+    "remote": "https://github.com/jhaberbe/lipid-droplet-pipeline.git",
+    "commit": "b627d05775db422d9e5b55d22443ec8bf3f50372"
+  },
+  "email": "jhaberbe@stanford.edu",
+  "root": "/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline",
+  "host": "sh03-10n05.int",
+  "executable": "/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/.venv/bin/python",
+  "codePathLocal": "segmentation-using-cell-borders.ipynb",
+  "cpu_count": 32,
+  "cpu_count_logical": 32,
+  "disk": {
+    "/": {
+      "total": "25757220864",
+      "used": "8169431040"
+    }
+  },
+  "memory": {
+    "total": "269799337984"
+  },
+  "cpu": {
+    "count": 32,
+    "countLogical": 32
+  },
+  "slurm": {
+    "cluster_name": "sherlock",
+    "conf": "/var/spool/slurmd/conf-cache/slurm.conf",
+    "cpus_on_node": "26",
+    "cpus_per_task": "26",
+    "export_env": "NONE",
+    "get_user_env": "1",
+    "gtids": "0",
+    "job_account": "isakova",
+    "job_cpus_per_node": "26",
+    "job_end_time": "1744859073",
+    "job_gid": "307858",
+    "job_id": "63313240",
+    "job_name": "sys/dashboard/sys/sh_code-server",
+    "job_nodelist": "sh03-10n05",
+    "job_num_nodes": "1",
+    "job_partition": "kibr",
+    "job_qos": "normal",
+    "job_start_time": "1744815866",
+    "job_uid": "439336",
+    "job_user": "jhaberbe",
+    "jobid": "63313240",
+    "localid": "0",
+    "mem_per_node": "204800",
+    "nnodes": "1",
+    "nodeid": "0",
+    "nodelist": "sh03-10n05",
+    "oom_kill_step": "0",
+    "prio_process": "0",
+    "procid": "0",
+    "script_context": "prolog_task",
+    "stepmgr": "sh03-10n05",
+    "submit_dir": "/var/www/ood/apps/sys/dashboard",
+    "submit_host": "sh04-ln04.stanford.edu",
+    "task_pid": "3305",
+    "tasks_per_node": "1",
+    "topology_addr": "sh03.sh03-isw-10n01.sh03-10n05",
+    "topology_addr_pattern": "switch.switch.node",
+    "tres_per_task": "cpu=26"
+  }
+}

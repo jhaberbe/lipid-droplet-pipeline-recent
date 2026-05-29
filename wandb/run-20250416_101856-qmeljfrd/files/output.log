@@ -1,0 +1,15 @@
+100%|██████████| 433/433 [02:13<00:00,  3.25it/s]
+  5%|▌         | 23/433 [00:09<08:17,  1.21s/it][34m[1mwandb[0m: [33mWARNING[0m Tried to log to step 0 that is less than the current step 433. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.
+100%|██████████| 433/433 [02:25<00:00,  2.98it/s]
+  3%|▎         | 14/433 [00:03<02:01,  3.45it/s][34m[1mwandb[0m: [33mWARNING[0m Tried to log to step 1 that is less than the current step 866. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.
+100%|██████████| 433/433 [02:19<00:00,  3.10it/s]
+  4%|▎         | 16/433 [00:04<01:56,  3.57it/s][34m[1mwandb[0m: [33mWARNING[0m Tried to log to step 2 that is less than the current step 1299. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.
+100%|██████████| 433/433 [02:13<00:00,  3.24it/s]
+  0%|          | 2/433 [00:00<02:41,  2.66it/s][34m[1mwandb[0m: [33mWARNING[0m Tried to log to step 3 that is less than the current step 1732. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.
+100%|██████████| 433/433 [02:22<00:00,  3.04it/s]
+  5%|▍         | 21/433 [00:08<02:29,  2.75it/s][34m[1mwandb[0m: [33mWARNING[0m Tried to log to step 4 that is less than the current step 2165. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.
+100%|██████████| 433/433 [02:16<00:00,  3.17it/s]
+  1%|          | 5/433 [00:01<02:16,  3.14it/s][34m[1mwandb[0m: [33mWARNING[0m Tried to log to step 5 that is less than the current step 2598. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.
+ 33%|███▎      | 141/433 [00:41<01:26,  3.38it/s]
+/oak/stanford/projects/kibr/Reorganizing/Projects/James/lipid-droplet-pipeline/.venv/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
